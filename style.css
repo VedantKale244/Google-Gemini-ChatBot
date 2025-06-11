@@ -1,0 +1,352 @@
+/* in the google gemini they use the poppins font so as we */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --text-color: #edf3ff;
+    --subheading-color: #97a7ca;
+    --placeholder-color: #c3cdde;
+    --primary-color: #101623;
+    --secondary-color: #283045;
+    --secondary-hover-color: #333e58;
+    --scrollbar-color: #626a7f;
+}
+
+body.light-theme {
+    --text-color: #090c13;
+    --subheading-color: #7b8cae;
+    --placeholder-color: #606982;
+    --primary-color: #f3f7ff;
+    --secondary-color: #dce6f9;
+    --secondary-hover-color: #d2ddf2;
+    --scrollbar-color: #a2aac2;
+  }
+
+body{
+    color: var(--text-color);
+    background: var(--primary-color);
+}
+
+.main-container{
+    overflow-y: auto;
+    padding: 32px 0 60px;
+    max-height: calc(100vh - 127px);
+    scrollbar-color: var(--scrollbar-color) transparent;
+}
+
+.main-container :where(.Headers, .suggestion-boxes, .msg, .prompt-container, .gemini-disclaimer) {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
+    max-width: 980px;
+}
+
+.main-container .Headers{
+    margin-top: 4vh;
+}
+
+/* Style the header section */
+.Headers .heading{
+    font-size: 3rem;
+    width: fit-content;
+    background: linear-gradient(to right, #1d7efd, #8f6fff);
+    background-clip: text; 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.Headers .sec-heading{
+    font-size: 2.6rem;
+    margin-top: -5px;
+    color: var(--subheading-color);
+}
+
+/* styling of the suggestion section */
+.main-container .suggestion-boxes{
+    display: flex;
+    gap: 15px;
+    margin-top: 9.5vh;
+    list-style: none;
+    overflow-x: auto;
+    /* we use "overflow-x: auto;" for horizontal scrolling*/
+    scrollbar-width: none;
+}
+
+body.chats-active .main-container :where(.Headers, .suggestion-boxes){
+    display: none;
+}
+
+.suggestion-boxes .suggestions{
+    width: 228px;
+    padding: 18px;
+    flex-shrink: 0;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-radius: 12px;
+    background: var(--secondary-color);
+    transition: 0.3s ease;
+}
+
+.suggestion-boxes .suggestions:hover{
+    background: var(--secondary-hover-color);
+}
+
+.suggestion-boxes .suggestions .text{
+    font-size: 1.1rem;
+}
+
+.suggestion-boxes .suggestions span{
+    height: 45px;
+    width: 45px;
+    margin-top: 35px;
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #1d7efd;
+    background: var(--primary-color);
+}
+
+.suggestion-boxes .suggestions:nth-child(2) span {
+    color: #28a745;
+}
+
+.suggestion-boxes .suggestions:nth-child(3) span {
+    color: #ffc107;
+}
+
+.suggestion-boxes .suggestions:nth-child(4) span {
+    color: #6f42c1;
+}
+
+/* styling of the chatbox container */
+.main-container .chatbox-container{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.chatbox-container .msg{
+    display: flex;
+    gap: 11px;
+    align-items: center;
+}
+
+.chatbox-container .bot-message .avatar {
+    height: 43px;
+    width: 43px;
+    flex-shrink: 0;
+    padding: 6px;
+    align-self: flex-start;
+    margin-right: -7px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    border: 1px solid var(--secondary-hover-color);
+}
+
+.chatbox-container .bot-message.loading .avatar {
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.chatbox-container .msg .text-message{
+    padding: 3px 16px;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.chatbox-container .bot-message {
+    margin: 9px auto;
+}
+
+.chatbox-container .user-message{
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.chatbox-container .user-message .text-message {
+    padding: 12px 16px;
+    max-width: 75%;
+    border-radius: 13px 13px 3px 13px;
+    background: var(--secondary-color);
+}
+
+.chatbox-container .user-message .img-attachment {
+    width: 50%;
+    margin-top: -7px;
+    border-radius: 13px 3px 13px 13px;
+}
+
+.chatbox-container .user-message .file-attachment {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 10px;
+    margin-top: -7px;
+    border-radius: 13px 3px 13px 13px;
+    background: var(--secondary-color);
+}
+
+.chatbox-container .user-message .file-attachment span {
+    color: #1d7efd;
+}
+
+/* Now the styling of the prompt container*/
+.prompt-container{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 16px 0;
+    background: var(--primary-color);
+}
+
+.prompt-container :where(.prompt-wrapper, .prompt-form, .actions-of-prompt){
+    display: flex;
+    gap: 12px;
+    height: 56px;
+    align-items: center;
+}
+
+.prompt-wrapper .prompt-form{
+    width: 100%;
+    height: 100%;
+    border-radius: 130px;
+    background: var(--secondary-color);
+}
+
+.prompt-form .prompt-input{
+    height: 100%;
+    width: 100%;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    padding-left: 24px;
+    color: var(--text-color);
+}
+
+.prompt-form .prompt-input::placeholder{
+    color: var(--placeholder-color);
+}
+
+.prompt-wrapper button{
+    width: 56px;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    color: var(--text-color);
+    background: var(--secondary-color);
+    transition: 0.3s ease;
+}
+
+.prompt-wrapper :is(button:hover, .file-icon, #cancel-file-btn){
+    background: var(--secondary-hover-color);
+}
+
+.prompt-form .actions-of-prompt{
+    gap: 5px;
+    margin-right: 7px;
+}
+
+.prompt-wrapper .prompt-form :where(.file-upload-wrapper, button, img) { 
+    position: relative;
+    height: 45px;
+    width: 45px;
+}
+
+.prompt-form #sent-prompt{
+    color: #fff;
+    display: none;
+    background: #1d7efd;
+}
+
+/* the upload button will be appear when the user write anything in the box */
+.prompt-form .prompt-input:valid ~ .actions-of-prompt #sent-prompt{
+    display: block;
+}
+
+.prompt-form #sent-prompt:hover{
+    background: #0264e3;
+}
+
+.prompt-form .file-upload-wrapper :where(button, img){
+    position: absolute;
+    border-radius: 50%;
+    object-fit: cover;
+    display: none;
+}
+
+.prompt-form .file-upload-wrapper #attach-file-btn,
+.prompt-form .file-upload-wrapper.active.img-attached img,
+.prompt-form .file-upload-wrapper.active.file-attached .file-icon,
+.prompt-form .file-upload-wrapper.active:hover
+#cancel-file-btn{
+    display: block;
+}
+
+.prompt-form .file-upload-wrapper.active #attach-file-btn{
+    display: none;
+}
+
+.prompt-form :is(#cancel-file-btn, #stop-response:hover) {
+    color: #d62939;
+}
+
+.prompt-form .file-icon {
+    color: #1d7efd;
+}
+
+.prompt-form #stop-response,
+body.bot-responding .prompt-form .file-upload-wrapper {
+    display: none;
+}
+
+body.bot-responding .prompt-form #stop-response{
+    display: block;
+}
+
+.prompt-container .gemini-disclaimer{
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 16px 20px 0;
+    color: var(--placeholder-color);
+}
+
+/* Responsive media query code for small screens */
+@media (max-width: 768px) {
+    .container {
+      padding: 20px 0 100px;
+    }
+  }
+  
+  .app-header :is(.heading, .sub-heading) {
+    font-size: 2rem;
+    line-height: 1.4;
+  }
+  
+  .prompt-form .file-upload-wrapper.active #cancel-file-btn {
+    opacity: 0;
+  }
+
+  .prompt-wrapper.hide-controls :where(#theme-toggle-btn, #delete-chat) {
+    display: none;
+}
